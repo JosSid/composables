@@ -19,6 +19,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
@@ -141,14 +143,14 @@ fun CalendarHeader(currentMonth: Calendar, onMonthChange: (Calendar) -> Unit) {
         ) {
             IconButton(onClick = { onMonthChange.invoke(getPreviousMonth(currentMonth)) }) {
                 Icon(
-                    imageVector = Icons.Default.KeyboardArrowLeft,
+                    imageVector = Icons.Default.ArrowBackIosNew,
                     contentDescription = "ArrowBack",
                     tint = Color(0xFF000000)
                 )
             }
             IconButton(onClick = { onMonthChange.invoke(getNextMonth(currentMonth)) }) {
                 Icon(
-                    imageVector = Icons.Default.KeyboardArrowRight,
+                    imageVector = Icons.Default.ArrowForwardIos,
                     contentDescription = "ArrowBack",
                     tint = Color(0xFF000000)
                 )
