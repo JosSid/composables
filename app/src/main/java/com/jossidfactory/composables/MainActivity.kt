@@ -11,9 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.jossidfactory.composables.ui.composables.JSCalendar
+import com.jossidfactory.composables.ui.login.LoginScreen
 import com.jossidfactory.composables.ui.main.MainScreen
 import com.jossidfactory.composables.ui.theme.ComposablesTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen { JSCalendar() }
+                    MainScreen { LoginScreen() }
                 }
             }
         }
