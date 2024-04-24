@@ -30,6 +30,7 @@ import androidx.compose.ui.text.input.ImeOptions
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jossidfactory.composables.ui.composables.ButtonApp
 import com.jossidfactory.composables.ui.composables.PasswordTextField
 import com.jossidfactory.composables.ui.composables.TextFieldMail
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -82,8 +83,10 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(50.dp))
             
-            Button(onClick = { viewModel.signUp() }) {
-                
+            ButtonApp(
+                text = "Login"
+            ) {
+                viewModel.signUp()
             }
 
         }
