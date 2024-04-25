@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jossidfactory.composables.R
+import com.jossidfactory.composables.ui.theme.PrimaryColor
 import com.jossidfactory.composables.ui.theme.buttonAppHeight
 import com.jossidfactory.composables.ui.theme.cornerShape
 import com.jossidfactory.composables.ui.theme.globalPadding
@@ -26,15 +27,19 @@ import com.jossidfactory.composables.ui.theme.horizontalPadding
 @Composable
 fun ButtonApp(
     text: String = "ButtonApp",
+    padding: Int? = null,
     onClick: () -> Unit
 ) {
+    val horizontalPadding = padding?.dp ?: horizontalPadding
+    val backgroundColor = PrimaryColor
+    val textColor = Color.White
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(buttonAppHeight)
             .padding(horizontal = horizontalPadding)
             .clip(RoundedCornerShape(cornerShape))
-            .background(color = Color(0xFF4CA2E6))
+            .background(color = backgroundColor)
             .shadow(elevation = 4.dp, shape = RoundedCornerShape(cornerShape))
             .clickable { onClick() },
         horizontalArrangement = Arrangement.Center,
@@ -42,7 +47,7 @@ fun ButtonApp(
     ) {
         Text(
             text = text,
-            color = Color.White,
+            color = textColor,
             )
     }
 }

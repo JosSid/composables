@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">Composables</string>
+
+    // TextFields labels
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+
+    // Login
+    <string name="login_button">Login</string>
+    <string name="login_title">Login Screen</string>
+    <string name="no_have_account">Don\'t have an account?</string>
+    <string name="go_to_signup">Signup</string>
+
+    // Signup
+    <string name="signup_button">Signup</string>
+    <string name="signup_title">Signup Screen</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="go_to_login">Login</string>
+
+    // Dialogs
+    <string name="close">Close</string>
+
+    // Error messages
+    <string name="empty_email">Email cannot be empty</string>
+    <string name="empty_password">Password cannot be empty</string>
+    <string name="format_email">Email format is not correct</string>
+    <string name="password_length">Password must be at least 6 characters long</string>
+    <string name="password_not_match">Passwords do not match</string>
+    <string name="all_fields_required">All fields are required</string>
+    <string name="user_already_registered">This user is already registered</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+
+    // Buttons
+    <string name="accept">Accept</string>
+
 </resources>
