@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.jossidfactory.composables.ui.login.LoginScreen
 import com.jossidfactory.composables.ui.main.MainScreen
+import com.jossidfactory.composables.ui.splash.SplashScreen
 import com.jossidfactory.composables.ui.theme.ComposablesTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen { LoginScreen() }
+                    SplashScreen()
                 }
             }
         }

@@ -76,19 +76,19 @@ class LoginViewModel @Inject constructor(
         val email = _state.value?.email
         val password = _state.value?.password
 
-            viewModelScope.launch {
-                val user = userDao.getUserByEmail(email!!)
+        viewModelScope.launch {
+            val user = userDao.getUserByEmail(email!!)
 
-                if(user != null) {
-                    setError(getString(context,R.string.user_already_registered))
-                    return@launch
-                } else {
-                    userDao.insertUser(UserEntity(email = email, password = password!!))
-                    setError("Hola")
-                }
+            if(user != null) {
+                setError(getString(context,R.string.user_already_registered))
+                return@launch
+            } else {
+                userDao.insertUser(UserEntity(email = email, password = password!!))
+                setError("Hola")
+            }
 //                val user = UserEntity(email = email, password = password)
 //                userDao.insertUser(user)
-            }
+        }
     }
 
     private fun validateSignup(): Boolean {
@@ -138,7 +138,9 @@ class LoginViewModel @Inject constructor(
                 return@launch
             }
 
-            setError("Hola")
+            user.logged = true
+
+            userDao.insertUser(user)
         }
     }
 
