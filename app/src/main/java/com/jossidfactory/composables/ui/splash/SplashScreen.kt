@@ -13,8 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jossidfactory.composables.R
+import com.jossidfactory.composables.ui.composables.ComposablesScreen
 import com.jossidfactory.composables.ui.composables.JSCalendar
-import com.jossidfactory.composables.ui.login.LoginScreen
 import com.jossidfactory.composables.ui.main.MainScreen
 
 @Composable
@@ -42,7 +42,9 @@ fun SplashScreen(
             }
         } else {
             MainScreen {
-                LoginScreen()
+                //DropDownApp()
+                //LoginScreen()
+                ComposablesScreen()
             }
         }
     }

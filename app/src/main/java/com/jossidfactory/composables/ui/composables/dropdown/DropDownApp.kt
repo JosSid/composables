@@ -1,4 +1,4 @@
-package com.jossidfactory.composables.ui.composables
+package com.jossidfactory.composables.ui.composables.dropdown
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -9,9 +9,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.Lock
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material.icons.outlined.TextFields
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,42 +28,61 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+/**
+ * DropDownApp composable that displays a dropdown menu
+ * @param options list of options to be displayed in the dropdown
+ * @param focusManager FocusManager used to manage focus
+ * @param placeholder text to be displayed when no option is selected
+ * @param leadingIcon ImageVector to be displayed at the start of the TextField
+ * @param leadingIconColor Color of the leading icon
+ * @param leadingIconVisibility Boolean to determine if the leading icon is visible
+ * @param resetOption Boolean to determine if the option should be reset
+ * @param onOptionChange callback function that returns the selected option
+ */
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasswordTextField(
-    password: String,
-    focusManager: FocusManager?,
-    placeholder: String = "Password",
-    onPasswordChange: (String) -> Unit
+fun DropDownApp(
+    options: List<String> = listOf("Option 1", "Option 2", "Option 3"),
+    focusManager: FocusManager? = null,
+    placeholder: String = "Options",
+    leadingIcon: ImageVector? = null,
+    leadingIconColor: Color = Color(0xFF4CA2E6),
+    leadingIconVisibility: Boolean = true,
+    resetOption: Boolean = false,
+    onOptionChange: (String) -> Unit = {}
 ) {
 
-    var visible by remember { mutableStateOf(false) }
+    var showDropDown by remember { mutableStateOf(false) }
 
+    var optionSelected by remember { mutableStateOf("") }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 40.dp)
             .background(Color.White, RoundedCornerShape(50.dp))
             .border(1.dp, Color(0xFF4CA2E6), RoundedCornerShape(50.dp)),
+            //.height(50.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
 
+        val iconColor = if(leadingIconVisibility) leadingIconColor else Color.Transparent
+
         Icon(
-            imageVector = Icons.Outlined.Lock,
+            imageVector = leadingIcon ?: Icons.Outlined.TextFields,
             contentDescription = "",
-            tint = Color(0xFF4CA2E6),
+            tint = iconColor,
             modifier = Modifier.padding(start = 20.dp)
         )
         TextField(
-            value = password,
+            value = optionSelected,
+            readOnly = true,
             onValueChange = {
-                onPasswordChange(it)
+                optionSelected = it
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -71,21 +91,22 @@ fun PasswordTextField(
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password
             ),
-            visualTransformation = if(visible) VisualTransformation.None else PasswordVisualTransformation(),
+            //visualTransformation = if(visible) VisualTransformation.None else
+                //PasswordVisualTransformation(),
             keyboardActions = KeyboardActions(
                 onDone = {
                     focusManager?.clearFocus()
                 }
             ),
             trailingIcon = {
-                val iconEye = if(!visible) Icons.Outlined.Visibility else Icons.Outlined
-                    .VisibilityOff
+                val iconArrow = if(!showDropDown) Icons.Outlined.KeyboardArrowDown else Icons.Outlined
+                    .KeyboardArrowUp
                 IconButton(
                     modifier = Modifier.padding(end = 20.dp),
-                    onClick = { visible = !visible }
+                    onClick = { showDropDown = !showDropDown }
                 ) {
                     Icon(
-                        imageVector = iconEye,
+                        imageVector = iconArrow,
                         contentDescription = "",
                         tint = Color(0xFF4CA2E6),
                     )
@@ -105,5 +126,17 @@ fun PasswordTextField(
                 )
             }
         )
+    }
+
+    if(showDropDown) {
+        DropDownContent(
+            list = options,
+            resetOption = resetOption,
+            optionSelected = optionSelected,
+            onItemSelected = {
+                optionSelected = it
+                showDropDown = false
+                onOptionChange(it)
+            })
     }
 }

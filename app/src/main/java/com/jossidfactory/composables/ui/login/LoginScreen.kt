@@ -1,7 +1,6 @@
 package com.jossidfactory.composables.ui.login
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,12 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -30,19 +25,17 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.ImeOptions
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jossidfactory.composables.R
 import com.jossidfactory.composables.ui.composables.ButtonApp
+import com.jossidfactory.composables.ui.composables.dropdown.DropDownApp
 import com.jossidfactory.composables.ui.composables.PasswordTextField
 import com.jossidfactory.composables.ui.composables.TextFieldMail
 import com.jossidfactory.composables.ui.composables.dialogs.InfoDialog
 import com.jossidfactory.composables.ui.theme.PrimaryColor
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun LoginScreen(
@@ -84,6 +77,8 @@ fun LoginScreen(
                     )
                 )
             )
+            Spacer(modifier = Modifier.height(50.dp))
+            DropDownApp()
             Spacer(modifier = Modifier.height(50.dp))
             TextFieldMail(
                 email = state.email,

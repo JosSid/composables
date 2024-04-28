@@ -66,7 +66,8 @@ fun TextFieldMail(
                 }
             ),
             colors = TextFieldDefaults.textFieldColors(
-                textColor = Color(0xFF4CA2E6),
+                focusedTextColor = Color(0xFF4CA2E6),
+                unfocusedTextColor = Color(0xFF4CA2E6),
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 containerColor = Color.Transparent
