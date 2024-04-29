@@ -33,26 +33,52 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 /**
- * DropDownApp composable that displays a dropdown menu
- * @param options list of options to be displayed in the dropdown
- * @param focusManager FocusManager used to manage focus
- * @param placeholder text to be displayed when no option is selected
- * @param leadingIcon ImageVector to be displayed at the start of the TextField
- * @param leadingIconColor Color of the leading icon
- * @param leadingIconVisibility Boolean to determine if the leading icon is visible
- * @param resetOption Boolean to determine if the option should be reset
- * @param onOptionChange callback function that returns the selected option
- */
+    * @param options list of options to be displayed in the dropdown
+    * @param placeholder text to be displayed in the text field
+    * @param borderColor color of the border
+    * @param borderSize size of the border
+    * @param borderShape shape of the border
+    * @param containerColor color of the container
+    * @param textColor color of the text
+    * @param leadingIcon icon to be displayed at the start of the text field
+    * @param leadingIconColor color of the leading icon
+    * @param leadingIconVisibility visibility of the leading icon
+    * @param trailingIconColor color of the trailing icon
+    * @param listTitleColor color of the list title
+    * @param listTitle title of the list
+    * @param optionTextColor color of the options
+    * @param selectedOptionTextColor color of the selected option
+    * @param optionBackgroundColor background color of the options
+    * @param selectedOptionBackgroundColor background color of the selected option
+    * @param borderDropdownColor color of the dropdown border
+    * @param resetOption can reset the option
+    * @param onOptionChange callback when an option is selected
+*/
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropDownApp(
-    options: List<String> = listOf("Option 1", "Option 2", "Option 3"),
-    focusManager: FocusManager? = null,
+    options: List<String> = emptyList(),
+    //focusManager: FocusManager? = null,
     placeholder: String = "Options",
+    borderColor: Color = Color.Black,
+    borderSize: Int = 1,
+    borderShape: Int = 50,
+    containerColor: Color? = null,
+    textColor: Color = Color.Black,
     leadingIcon: ImageVector? = null,
-    leadingIconColor: Color = Color(0xFF4CA2E6),
+    leadingIconColor: Color = Color.Black,
     leadingIconVisibility: Boolean = true,
+    trailingIconColor: Color = Color.Black,
+    listTitleColor: Color = Color.Black,
+    listTitle: String = "Select an option",
+    optionTextColor: Color = Color.Black,
+    selectedOptionTextColor: Color = Color.White,
+    optionBackgroundColor: Color = Color.Transparent,
+    selectedOptionBackgroundColor: Color = Color.Black,
+    borderDropdownColor: Color = Color.Black,
     resetOption: Boolean = false,
     onOptionChange: (String) -> Unit = {}
 ) {
@@ -64,8 +90,8 @@ fun DropDownApp(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 40.dp)
-            .background(Color.White, RoundedCornerShape(50.dp))
-            .border(1.dp, Color(0xFF4CA2E6), RoundedCornerShape(50.dp)),
+            .background(containerColor ?: Color.White, RoundedCornerShape(borderShape.dp))
+            .border(borderSize.dp, borderColor, RoundedCornerShape(borderShape.dp)),
             //.height(50.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -87,17 +113,15 @@ fun DropDownApp(
             modifier = Modifier
                 .fillMaxWidth(),
             //.padding(horizontal = 4.dp),
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Password
-            ),
-            //visualTransformation = if(visible) VisualTransformation.None else
-                //PasswordVisualTransformation(),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    focusManager?.clearFocus()
-                }
-            ),
+//            keyboardOptions = KeyboardOptions(
+//                imeAction = ImeAction.Done,
+//                keyboardType = KeyboardType.Password
+//            ),
+//            keyboardActions = KeyboardActions(
+//                onDone = {
+//                    focusManager?.clearFocus()
+//                }
+//            ),
             trailingIcon = {
                 val iconArrow = if(!showDropDown) Icons.Outlined.KeyboardArrowDown else Icons.Outlined
                     .KeyboardArrowUp
@@ -108,13 +132,13 @@ fun DropDownApp(
                     Icon(
                         imageVector = iconArrow,
                         contentDescription = "",
-                        tint = Color(0xFF4CA2E6),
+                        tint = trailingIconColor,
                     )
                 }
             },
             colors = TextFieldDefaults.textFieldColors(
-                focusedTextColor = Color(0xFF4CA2E6),
-                unfocusedTextColor = Color(0xFF4CA2E6),
+                focusedTextColor = textColor,
+                unfocusedTextColor = textColor,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 containerColor = Color.Transparent
@@ -122,7 +146,7 @@ fun DropDownApp(
             placeholder = {
                 Text(
                     text = placeholder,
-                    color = Color(0xFF4CA2E6)
+                    color = textColor
                 )
             }
         )
@@ -132,6 +156,13 @@ fun DropDownApp(
         DropDownContent(
             list = options,
             resetOption = resetOption,
+            listTitleColor = listTitleColor,
+            listTitle = listTitle,
+            optionTextColor = optionTextColor,
+            selectedOptionTextColor = selectedOptionTextColor,
+            optionBackgroundColor = optionBackgroundColor,
+            selectedOptionBackgroundColor = selectedOptionBackgroundColor,
+            borderDropdownColor = borderDropdownColor,
             optionSelected = optionSelected,
             onItemSelected = {
                 optionSelected = it

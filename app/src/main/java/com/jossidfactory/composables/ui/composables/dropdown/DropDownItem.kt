@@ -19,13 +19,17 @@ import com.jossidfactory.composables.ui.theme.PrimaryColor
 fun DropDownItem(
     text: String,
     isSelected: Boolean,
+    optionTextColor: Color,
+    selectedOptionTextColor: Color,
+    optionBackgroundColor: Color,
+    selectedOptionBackgroundColor: Color,
     onItemClick: () -> Unit
 ) {
 
     val backgroundColor = if (isSelected) {
-        PrimaryColor
+        selectedOptionBackgroundColor
     } else {
-        Color.Transparent
+        optionBackgroundColor
     }
     Column(
         modifier = Modifier
@@ -37,7 +41,7 @@ fun DropDownItem(
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = text,
-            color = if (isSelected) Color.White else Color.Black
+            color = if (isSelected) selectedOptionTextColor else optionTextColor
         )
         Spacer(modifier = Modifier.height(10.dp))
         HorizontalDivider()
